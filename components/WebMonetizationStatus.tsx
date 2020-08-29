@@ -43,9 +43,9 @@ export const WebMonetizationStatus: FC<WebMonetizationStatusProps> = (
             setStatus(
               <div>
                 <h1>Receiving payment...</h1>
-                <hr />
+                <hr style={{ position: 'relative', zIndex: 1 }} />
                 <ProgressBar
-                  style={{ position: 'relative', top: '-10px' }}
+                  style={{ position: 'relative', top: '-8px' }}
                   value={(100 * balance) / props.requiredBalance}
                 />
               </div>
