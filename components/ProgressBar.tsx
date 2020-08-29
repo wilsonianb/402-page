@@ -4,21 +4,19 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
   colorPrimary: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#ffffff'
   },
   bar1Determinate: {
-    backgroundColor: '#198c19',
+    backgroundColor: '#198c19'
   }
 })
 
 interface ProgressBarProps {
-  style: CSSProperties,
+  style: CSSProperties
   value: number
 }
 
-export const ProgressBar: FC<ProgressBarProps> = (
-  props: ProgressBarProps
-) => {
+export const ProgressBar: FC<ProgressBarProps> = (props: ProgressBarProps) => {
   const classes = useStyles()
 
   return (
@@ -28,7 +26,7 @@ export const ProgressBar: FC<ProgressBarProps> = (
         bar1Determinate: classes.bar1Determinate
       }}
       style={props.style}
-      variant="determinate"
+      variant='determinate'
       value={props.value}
     />
   )

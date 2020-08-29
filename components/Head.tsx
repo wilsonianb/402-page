@@ -9,7 +9,11 @@ export const Head: FC<HeadProps> = (props: HeadProps) => {
   return (
     <NextHead>
       <title>402 Payment Required</title>
-      { props.paymentPointer ? <meta name='monetization' content={props.paymentPointer} /> : <></> }
+      {props.paymentPointer ? (
+        <meta name='monetization' content={props.paymentPointer} />
+      ) : (
+        <></>
+      )}
     </NextHead>
   )
 }

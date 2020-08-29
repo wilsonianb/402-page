@@ -16,7 +16,7 @@ interface IndexProps {
 
 const IndexPage: NextPage<IndexProps> = (props: IndexProps) => {
   return (
-    <div style={{textAlign: "center"}}>
+    <div style={{ textAlign: 'center' }}>
       <Head paymentPointer={props.paymentPointer} />
       <WebMonetizationStatus
         balanceId={props.balanceId}
@@ -36,7 +36,9 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
 
   if (!props.balanceId) {
     if (props.balanceIdHeader) {
-      const header = ctx.req.headers[props.balanceIdHeader.toLowerCase()] as string
+      const header = ctx.req.headers[
+        props.balanceIdHeader.toLowerCase()
+      ] as string
       if (!header) {
         throw `no ${props.balanceIdHeader} header`
       }
@@ -53,21 +55,21 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
       }
     }
   } else if (props.balanceIdHeader) {
-    throw "BALANCE_ID and BALANCE_ID_HEADER are mutually exclusive"
+    throw 'BALANCE_ID and BALANCE_ID_HEADER are mutually exclusive'
   } else if (props.balanceIdRegex) {
-    throw "BALANCE_ID_REGEX requires BALANCE_ID_HEADER"
+    throw 'BALANCE_ID_REGEX requires BALANCE_ID_HEADER'
   }
 
   if (props.receiptVerifierUri && !props.balanceId) {
-    throw "RECEIPT_VERIFIER_URI requires BALANCE_ID*"
+    throw 'RECEIPT_VERIFIER_URI requires BALANCE_ID*'
   }
 
   if (props.requiredBalance && !props.receiptVerifierUri) {
-    throw "REQUIRED_BALANCE requires RECEIPT_VERIFIER_URI"
+    throw 'REQUIRED_BALANCE requires RECEIPT_VERIFIER_URI'
   }
 
   if (props.redirectURI && !props.requiredBalance) {
-    throw "REDIRECT_URI requires REQUIRED_BALANCE"
+    throw 'REDIRECT_URI requires REQUIRED_BALANCE'
   }
 
   return { props }
