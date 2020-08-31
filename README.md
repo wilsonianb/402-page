@@ -4,6 +4,8 @@
 
 [Web monetized](https://webmonetizaation.org) 402 Payment Required error page.
 
+![](402-page.gif)
+
 ### Run
 
 ```
