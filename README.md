@@ -37,37 +37,57 @@ npm start
 ##### Web monetized error page
 
 ```
-PAYMENT_POINTER=$example-wallet.com/account npm start
+PAYMENT_POINTER=$example-wallet.com/account \
+npm start
 ```
 
 ##### Balance-tracking web monetized error page
 
 ```
-PAYMENT_POINTER=$example-verifier.com RECEIPT_VERIFIER_URI=https://example-verifier.com/balances BALANCE_ID=primary npm start
+PAYMENT_POINTER=$example-verifier.com \
+RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
+BALANCE_ID=primary \
+npm start
 ```
 
 ###### Host header as balance ID
 
 ```
-PAYMENT_POINTER=$example-verifier.com RECEIPT_VERIFIER_URI=https://example-verifier.com/balances BALANCE_ID_HEAD=Host npm start
+PAYMENT_POINTER=$example-verifier.com \
+RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
+BALANCE_ID_HEAD=Host \
+npm start
 ```
 
 ###### Subdomain as balance ID
 
 ```
-PAYMENT_POINTER=$example-verifier.com RECEIPT_VERIFIER_URI=https://example-verifier.com/balances BALANCE_ID_HEAD=Host BALANCE_ID_REGEX="(?<id>.*).example.com" npm start
+PAYMENT_POINTER=$example-verifier.com \
+RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
+BALANCE_ID_HEAD=Host \
+BALANCE_ID_REGEX="(?<id>.*).example.com" \
+npm start
 ```
 
 ##### Auto-reload on sufficient balance
 
 ```
-PAYMENT_POINTER=$example-verifier.com RECEIPT_VERIFIER_URI=https://example-verifier.com/balances BALANCE_ID=primary REQUIRED_BALANCE=100 npm start
+PAYMENT_POINTER=$example-verifier.com \
+RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
+BALANCE_ID=primary \
+REQUIRED_BALANCE=100 \
+npm start
 ```
 
 ##### Auto-redirect on sufficient balance
 
 ```
-PAYMENT_POINTER=$example-verifier.com RECEIPT_VERIFIER_URI=https://example-verifier.com/balances BALANCE_ID=primary REQUIRED_BALANCE=100 REDIRECT_URI=https://service.example.com npm start
+PAYMENT_POINTER=$example-verifier.com \
+RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
+BALANCE_ID=primary \
+REQUIRED_BALANCE=100 \
+REDIRECT_URI=https://service.example.com \
+npm start
 ```
 
 ### Routes
