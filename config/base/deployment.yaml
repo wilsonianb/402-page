@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 402-page
+  namespace: default
+  labels:
+    app: 402-page
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: 402-page
+  template:
+    metadata:
+      labels:
+        app: 402-page
+    spec:
+      containers:
+        - name: 402-page
+          image: wilsonianbcoil/402-page
