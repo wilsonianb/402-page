@@ -57,7 +57,7 @@ npm start
 ```
 PAYMENT_POINTER=$example-verifier.com \
 RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
-BALANCE_ID_HEAD=Host \
+BALANCE_ID_HEADER=Host \
 npm start
 ```
 
@@ -66,7 +66,7 @@ npm start
 ```
 PAYMENT_POINTER=$example-verifier.com \
 RECEIPT_VERIFIER_URI=https://example-verifier.com/balances \
-BALANCE_ID_HEAD=Host \
+BALANCE_ID_HEADER=Host \
 BALANCE_ID_REGEX="(?<id>.*).example.com" \
 npm start
 ```
