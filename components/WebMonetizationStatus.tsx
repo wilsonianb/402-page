@@ -20,6 +20,7 @@ export const WebMonetizationStatus: FC<WebMonetizationStatusProps> = (
       <hr />
     </div>
   )
+  const [done, setDone] = useState(false)
 
   useEffect(() => {
     if (receipt !== null && props.receiptVerifierUri && props.balanceId) {
@@ -31,25 +32,25 @@ export const WebMonetizationStatus: FC<WebMonetizationStatusProps> = (
             body: receipt
           }
         )
-        if (res.ok && props.requiredBalance) {
+        if (!done && res.ok && props.requiredBalance) {
           const balance = parseInt(await res.text())
+          setStatus(
+            <div>
+              <h1>Receiving payment...</h1>
+              <hr style={{ position: 'relative', zIndex: 1 }} />
+              <ProgressBar
+                style={{ position: 'relative', top: '-8px' }}
+                value={Math.min((100 * balance) / props.requiredBalance, 100)}
+              />
+            </div>
+          )
           if (balance >= props.requiredBalance) {
+            setDone(true)
             if (props.redirectURI) {
               window.location.replace(props.redirectURI)
             } else {
               window.location.reload(true)
             }
-          } else {
-            setStatus(
-              <div>
-                <h1>Receiving payment...</h1>
-                <hr style={{ position: 'relative', zIndex: 1 }} />
-                <ProgressBar
-                  style={{ position: 'relative', top: '-8px' }}
-                  value={(100 * balance) / props.requiredBalance}
-                />
-              </div>
-            )
           }
         }
       }
