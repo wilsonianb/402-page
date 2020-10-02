@@ -2,7 +2,7 @@
 
 ![](https://github.com/wilsonianb/402-page/workflows/Docker%20CI/badge.svg)
 
-[Web monetized](https://webmonetizaation.org) 402 Payment Required error page.
+[Web monetized](https://webmonetization.org) 402 Payment Required error page.
 
 ![](402-page.gif)
 
