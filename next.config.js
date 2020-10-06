@@ -10,6 +10,7 @@ module.exports = {
     paymentPointer: process.env.PAYMENT_POINTER,
     receiptVerifierUri: process.env.RECEIPT_VERIFIER_URI,
     redirectURI: process.env.REDIRECT_URI,
+    requiredAmount: parseInt(process.env.REQUIRED_AMOUNT),
     requiredBalance: parseInt(process.env.REQUIRED_BALANCE)
   }
 }

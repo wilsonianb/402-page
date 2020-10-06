@@ -10,6 +10,7 @@ interface IndexProps {
   paymentPointer: string
   balanceId: string
   receiptVerifierUri: string
+  requiredAmount: number
   requiredBalance: number
   redirectURI: string
 }
@@ -21,6 +22,7 @@ const IndexPage: NextPage<IndexProps> = (props: IndexProps) => {
       <WebMonetizationStatus
         balanceId={props.balanceId}
         receiptVerifierUri={props.receiptVerifierUri}
+        requiredAmount={props.requiredAmount}
         requiredBalance={props.requiredBalance}
         redirectURI={props.redirectURI}
       />
@@ -60,16 +62,24 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     throw 'BALANCE_ID_REGEX requires BALANCE_ID_HEADER'
   }
 
-  if (props.receiptVerifierUri && !props.balanceId) {
-    throw 'RECEIPT_VERIFIER_URI requires BALANCE_ID*'
+  if (props.balanceId && !props.receiptVerifierUri) {
+    throw 'BALANCE_ID* requires RECEIPT_VERIFIER_URI'
   }
 
-  if (props.requiredBalance && !props.receiptVerifierUri) {
-    throw 'REQUIRED_BALANCE requires RECEIPT_VERIFIER_URI'
+  if (props.requiredBalance && !props.balanceId) {
+    throw 'REQUIRED_BALANCE requires BALANCE_ID*'
   }
 
-  if (props.redirectURI && !props.requiredBalance) {
-    throw 'REDIRECT_URI requires REQUIRED_BALANCE'
+  if (props.requiredAmount && !props.receiptVerifierUri) {
+    throw 'REQUIRED_AMOUNT requires RECEIPT_VERIFIER_URI'
+  }
+
+  if (props.requiredAmount && props.requiredBalance) {
+    throw 'REQUIRED_AMOUNT and REQUIRED_BALANCE are mutually exclusive'
+  }
+
+  if (props.redirectURI && !props.requiredAmount && !props.requiredBalance) {
+    throw 'REDIRECT_URI requires REQUIRED_AMOUNT or REQUIRED_BALANCE'
   }
 
   return { props }
