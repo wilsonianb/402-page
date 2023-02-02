@@ -18,16 +18,18 @@ npm start
 
 All environment variables are optional.
 
-| Environment Variable   | Description                                                                                                                                                                                                                                                                      |
-| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PAYMENT_POINTER`      | [Payment pointer](https://paymentpointers.org/) for Web Monetization payment.                                                                                                                                                                                                    |
-| `BALANCE_ID`           | The [receipt verifier](https://github.com/coilhq/receipt-verifier) balance ID.                                                                                                                                                                                                   |
-| `BALANCE_ID_HEADER`    | Request header from which to get the balance ID. Case insensitive. Mutually exclusive with `BALANCE_ID`                                                                                                                                                                          |
-| `BALANCE_ID_REGEX`     | Regular expression pattern with a [named capture group](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges) of `id` to extract the balance ID from the `BALANCE_ID_HEADER`                                                      |
-| `RECEIPT_VERIFIER_URI` | Root URI of the [receipt verifier](https://github.com/coilhq/receipt-verifier)'s `balances` API to which to credit receipts. Requires a balance ID.                                                                                                                              |
-| `REQUIRED_AMOUNT`      | The paid amount required to bypass the error page. Denominated in the recipient's asset (code and scale). The page will reload (or redirect if `REDIRECT_URI` is specified) when the amount is paid. Requires `RECEIPT_VERIFIER_URI`. Mutually exclusive with `REQUIRED_BALANCE` |
-| `REQUIRED_BALANCE`     | The balance amount required to bypass the error page. Denominated in the recipient's asset (code and scale). The page will reload (or redirect if `REDIRECT_URI` is specified) when the balance is reached. Requires `RECEIPT_VERIFIER_URI`                                      |
-| `REDIRECT_URI`         | URI to redirect to once the specified balance exceeds the `REQUEST_PRICE`.                                                                                                                                                                                                       |
+| Environment Variable        | Description                                                                                                                                                                                                                                                                      |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `PAYMENT_POINTER`           | [Payment pointer](https://paymentpointers.org/) for Web Monetization payment.                                                                                                                                                                                                    |
+| `PAYMENT_POINTER_ID_HEADER` | Request header from which to get the payment pointer path. Case insensitive.                                                                                                                                                                                                     |
+| `PAYMENT_POINTER_ID_REGEX`  | Regular expression pattern with a [named capture group](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges) of `id` to extract the payment pointer path from the `PAYMENT_POINTER_ID_HEADER`                                    |
+| `BALANCE_ID`                | The [receipt verifier](https://github.com/coilhq/receipt-verifier) balance ID.                                                                                                                                                                                                   |
+| `BALANCE_ID_HEADER`         | Request header from which to get the balance ID. Case insensitive. Mutually exclusive with `BALANCE_ID`                                                                                                                                                                          |
+| `BALANCE_ID_REGEX`          | Regular expression pattern with a [named capture group](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions/Groups_and_Ranges) of `id` to extract the balance ID from the `BALANCE_ID_HEADER`                                                      |
+| `RECEIPT_VERIFIER_URI`      | Root URI of the [receipt verifier](https://github.com/coilhq/receipt-verifier)'s `balances` API to which to credit receipts. Requires a balance ID.                                                                                                                              |
+| `REQUIRED_AMOUNT`           | The paid amount required to bypass the error page. Denominated in the recipient's asset (code and scale). The page will reload (or redirect if `REDIRECT_URI` is specified) when the amount is paid. Requires `RECEIPT_VERIFIER_URI`. Mutually exclusive with `REQUIRED_BALANCE` |
+| `REQUIRED_BALANCE`          | The balance amount required to bypass the error page. Denominated in the recipient's asset (code and scale). The page will reload (or redirect if `REDIRECT_URI` is specified) when the balance is reached. Requires `RECEIPT_VERIFIER_URI`                                      |
+| `REDIRECT_URI`              | URI to redirect to once the specified balance exceeds the `REQUEST_PRICE`.                                                                                                                                                                                                       |
 
 #### Examples
 
@@ -43,6 +45,23 @@ npm start
 PAYMENT_POINTER=$example-wallet.com/account \
 npm start
 
+```
+
+###### Host header as payment pointer path
+
+```
+PAYMENT_POINTER=$example-verifier.com \
+PAYMENT_POINTER_ID_HEADER=Host \
+npm start
+```
+
+###### Subdomain as payment pointer path
+
+```
+PAYMENT_POINTER=$example-verifier.com \
+PAYMENT_POINTER_ID_HEADER=Host \
+PAYMENT_POINTER_ID_REGEX="(?<id>.*).example.com" \
+npm start
 ```
 
 ##### Submit receipts
